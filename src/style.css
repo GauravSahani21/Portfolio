@@ -12,6 +12,8 @@ html {
   );
 
   --imp-text-color: #c770f0;
+
+  scroll-behavior: smooth;
 }
 
 .purple {
@@ -20,7 +22,7 @@ html {
 
 button:focus {
   box-shadow: none !important;
-}
+}¸
 
 /* --------- */
 /*  Preloader */
@@ -551,7 +553,7 @@ button:focus {
 }
 
 .tech-icons {
-  font-size: 4.5em !important;
+  font-size: 4em !important;
   margin: 15px !important;
   padding: 10px !important;
   opacity: 0.93 !important;

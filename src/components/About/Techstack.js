@@ -19,47 +19,61 @@ import {
 
 function Techstack() {
   return (
-    <Row style={{ justifyContent: "center", paddingBottom: "50px" }}>
-      <Col xs={4} md={2} className="tech-icons">
-        <CgCPlusPlus />
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <DiJavascript1 />
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <DiNodejs />
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <DiReact />
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <DiMysql />
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <DiHtml5 />
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <DiCss3 />
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <DiPhp />
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <DiBootstrap />
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <DiMongodb />
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <DiGit />
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <DiPython />
-      </Col>
-      <Col xs={4} md={2} className="tech-icons">
-        <DiJava />
-      </Col>
-    </Row>
+   <Row style={{ justifyContent: "center", paddingBottom: "50px" }}>
+  <Col xs={4} md={2} className="tech-icons text-center">
+    <CgCPlusPlus />
+    <div style={{ marginTop: "8px", fontSize: "14px", color: "#555" }}>C++</div>
+  </Col>
+  <Col xs={4} md={2} className="tech-icons text-center">
+    <DiJavascript1 />
+    <div style={{ marginTop: "8px", fontSize: "14px", color: "#555" }}>JavaScript</div>
+  </Col>
+  <Col xs={4} md={2} className="tech-icons text-center">
+    <DiNodejs />
+    <div style={{ marginTop: "8px", fontSize: "14px", color: "#555" }}>Node.js</div>
+  </Col>
+  <Col xs={4} md={2} className="tech-icons text-center">
+    <DiReact />
+    <div style={{ marginTop: "8px", fontSize: "14px", color: "#555" }}>React</div>
+  </Col>
+  <Col xs={4} md={2} className="tech-icons text-center">
+    <DiMysql />
+    <div style={{ marginTop: "8px", fontSize: "14px", color: "#555" }}>MySQL</div>
+  </Col>
+  <Col xs={4} md={2} className="tech-icons text-center">
+    <DiHtml5 />
+    <div style={{ marginTop: "8px", fontSize: "14px", color: "#555" }}>HTML5</div>
+  </Col>
+  <Col xs={4} md={2} className="tech-icons text-center">
+    <DiCss3 />
+    <div style={{ marginTop: "8px", fontSize: "14px", color: "#555" }}>CSS3</div>
+  </Col>
+  <Col xs={4} md={2} className="tech-icons text-center">
+    <DiPhp />
+    <div style={{ marginTop: "8px", fontSize: "14px", color: "#555" }}>PHP</div>
+  </Col>
+  <Col xs={4} md={2} className="tech-icons text-center">
+    <DiBootstrap />
+    <div style={{ marginTop: "8px", fontSize: "14px", color: "#555" }}>Bootstrap</div>
+  </Col>
+  <Col xs={4} md={2} className="tech-icons text-center">
+    <DiMongodb />
+    <div style={{ marginTop: "8px", fontSize: "14px", color: "#555" }}>MongoDB</div>
+  </Col>
+  <Col xs={4} md={2} className="tech-icons text-center">
+    <DiGit />
+    <div style={{ marginTop: "8px", fontSize: "14px", color: "#555" }}>Git</div>
+  </Col>
+  <Col xs={4} md={2} className="tech-icons text-center">
+    <DiPython />
+    <div style={{ marginTop: "8px", fontSize: "14px", color: "#555" }}>Python</div>
+  </Col>
+  <Col xs={4} md={2} className="tech-icons text-center">
+    <DiJava />
+    <div style={{ marginTop: "8px", fontSize: "14px", color: "#555" }}>Java</div>
+  </Col>
+</Row>
+
   );
 }
 
