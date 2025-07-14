@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/static/css/main.27cacc5b.css",
+    "main.js": "/static/js/main.e35eb79c.js",
+    "static/js/453.5d79306b.chunk.js": "/static/js/453.5d79306b.chunk.js",
+    "static/media/youtube.png": "/static/media/youtube.f761b5f95decaac99daa.png",
+    "static/media/tictactoe.png": "/static/media/tictactoe.50801dac2b990b259f4c.png",
+    "static/media/stonepaper.png": "/static/media/stonepaper.b65b6b0832be2920cb6c.png",
+    "static/media/project6.png": "/static/media/project6.90656c26be27946222d6.png",
+    "static/media/project4.png": "/static/media/project4.ef6aac705c85b8c79096.png",
+    "static/media/project5.png": "/static/media/project5.b8ed0220267a37ed5207.png",
+    "static/media/home-main.svg": "/static/media/home-main.541f8179af8209ce03ccf2178fe62dbf.svg",
+    "static/media/about.png": "/static/media/about.aee0f771fbfc1e7b8fa8.png",
+    "static/media/Resume_GauravSahani21.pdf": "/static/media/Resume_GauravSahani21.4c738c84e713ff177db2.pdf",
+    "static/media/home-bg.jpg": "/static/media/home-bg.dc52d5d40a40b13154b0.jpg",
+    "static/media/avatar.svg": "/static/media/avatar.5852f40fbb38aa284829fa3fb7722225.svg",
+    "static/media/pre.svg": "/static/media/pre.d4812f51c8c80976eaab.svg",
+    "index.html": "/index.html",
+    "main.27cacc5b.css.map": "/static/css/main.27cacc5b.css.map",
+    "main.e35eb79c.js.map": "/static/js/main.e35eb79c.js.map",
+    "453.5d79306b.chunk.js.map": "/static/js/453.5d79306b.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.27cacc5b.css",
+    "static/js/main.e35eb79c.js"
+  ]
+}
