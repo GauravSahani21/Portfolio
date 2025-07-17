@@ -3,6 +3,8 @@ import { Container, Row, Col } from "react-bootstrap";
 import ProjectCard from "./ProjectCards";
 import Particle from "../Particle";
 import ThinkBoard from "../../Assets/Projects/ThinkBoard.png";
+import PhotoSorter from "../../Assets/Projects/PhotoSorter.png";
+import Portfolio from "../../Assets/Projects/Portfolio.png";
 import FoodApp from "../../Assets/Projects/project5.png";
 import MyTunes from "../../Assets/Projects/project6.png";
 import Landing from "../../Assets/Projects/project4.png";
@@ -32,9 +34,25 @@ function Projects() {
           </Col>
           <Col md={4} className="project-card">
             <ProjectCard
+              imgPath={PhotoSorter}
+              isBlog={false}
+              title="MERN-ThinkBoard"
+              demoLink="https://photo-selector.vercel.app/"
+            />
+          </Col>
+          <Col md={4} className="project-card">
+            <ProjectCard
+              imgPath={Portfolio}
+              isBlog={false}
+              title="Portfolio Website"
+              demoLink="https://portfolio-alpha-pearl-78.vercel.app/"
+            />
+          </Col>
+          <Col md={4} className="project-card">
+            <ProjectCard
               imgPath={FoodApp}
               isBlog={false}
-              title="Food Delivery "
+              title="Restaurant Website"
               demoLink="https://gauravsahani21.github.io/eCommerce-Website/"
             />
           </Col>
