@@ -36,7 +36,7 @@ function Projects() {
             <ProjectCard
               imgPath={PhotoSorter}
               isBlog={false}
-              title="MERN-ThinkBoard"
+              title="Photo Sorter"
               demoLink="https://photo-selector.vercel.app/"
             />
           </Col>
