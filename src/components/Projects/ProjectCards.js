@@ -22,7 +22,7 @@ function ProjectCards(props) {
             style={{ marginLeft: "10px" }}
           >
             <CgWebsite /> &nbsp;
-            {"Demo"}
+            {"Visit"}
           </Button>
         )}
       </Card.Body>

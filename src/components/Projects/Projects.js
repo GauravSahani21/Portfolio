@@ -2,6 +2,7 @@ import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import ProjectCard from "./ProjectCards";
 import Particle from "../Particle";
+import ThinkBoard from "../../Assets/Projects/ThinkBoard.png";
 import FoodApp from "../../Assets/Projects/project5.png";
 import MyTunes from "../../Assets/Projects/project6.png";
 import Landing from "../../Assets/Projects/project4.png";
@@ -21,6 +22,14 @@ function Projects() {
           Here are a few projects I've worked on recently.
         </p>
         <Row style={{ justifyContent: "center", paddingBottom: "10px" }}>
+          <Col md={4} className="project-card">
+            <ProjectCard
+              imgPath={ThinkBoard}
+              isBlog={false}
+              title="MERN-ThinkBoard"
+              demoLink="https://mern-thinkboard-1-c01d.onrender.com"
+            />
+          </Col>
           <Col md={4} className="project-card">
             <ProjectCard
               imgPath={FoodApp}
@@ -48,10 +57,10 @@ function Projects() {
           </Col>
           <Col md={4} className="project-card">
             <ProjectCard
-              imgPath={Youtube}
+              imgPath={TicTacToe}
               isBlog={false}
-              title="Youtube Clone"
-              demoLink="https://gauravsahani21.github.io/Youtube-clone/"
+              title="tic tac toe"
+              demoLink="https://gauravsahani21.github.io/tic-tac-toe-game/"
             />
           </Col>
           <Col md={4} className="project-card">
@@ -64,10 +73,10 @@ function Projects() {
           </Col>
           <Col md={4} className="project-card">
             <ProjectCard
-              imgPath={TicTacToe}
+              imgPath={Youtube}
               isBlog={false}
-              title="tic tac toe"
-              demoLink="https://gauravsahani21.github.io/tic-tac-toe-game/"
+              title="Youtube Clone"
+              demoLink="https://gauravsahani21.github.io/Youtube-clone/"
             />
           </Col>
         </Row>
