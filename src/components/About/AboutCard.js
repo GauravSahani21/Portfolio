@@ -12,10 +12,8 @@ function AboutCard() {
             from <span className="purple"> Goa, India.</span>
             <br />
             <br />
-            I am now looking for a role where I can contribute to meaningful projects, learn from industry experts, and
-continue growing as a developer. <br />
-            <br />
-            I have completed BCA at Don Bosco College Panjim Goa.
+            I have completed BCA at Don Bosco College Panjim Goa,
+            <br />With Grade 7.8 CGPA.
             <br />
             <br />
             Apart from coding, some other activities that I love to do!
@@ -28,6 +26,10 @@ continue growing as a developer. <br />
               <ImPointRight /> Travelling
             </li>
           </ul>
+          <br />
+          I am now looking for a role where I can contribute to meaningful
+          projects, learn from industry experts, and continue growing as a
+          developer. <br />
         </blockquote>
       </Card.Body>
     </Card>

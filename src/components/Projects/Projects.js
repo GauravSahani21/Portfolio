@@ -4,6 +4,7 @@ import ProjectCard from "./ProjectCards";
 import Particle from "../Particle";
 import ThinkBoard from "../../Assets/Projects/ThinkBoard.png";
 import PhotoSorter from "../../Assets/Projects/PhotoSorter.png";
+import RecurringDP from "../../Assets/Projects/RecurringDP.png";
 import Portfolio from "../../Assets/Projects/Portfolio.png";
 import FoodApp from "../../Assets/Projects/project5.png";
 import MyTunes from "../../Assets/Projects/project6.png";
@@ -26,6 +27,14 @@ function Projects() {
         <Row style={{ justifyContent: "center", paddingBottom: "10px" }}>
           <Col md={4} className="project-card">
             <ProjectCard
+              imgPath={PhotoSorter}
+              isBlog={false}
+              title="Photo Sorter"
+              demoLink="https://photo-selector.vercel.app/"
+            />
+          </Col>
+          <Col md={4} className="project-card">
+            <ProjectCard
               imgPath={ThinkBoard}
               isBlog={false}
               title="MERN-ThinkBoard"
@@ -34,10 +43,10 @@ function Projects() {
           </Col>
           <Col md={4} className="project-card">
             <ProjectCard
-              imgPath={PhotoSorter}
+              imgPath={RecurringDP}
               isBlog={false}
-              title="Photo Sorter"
-              demoLink="https://photo-selector.vercel.app/"
+              title="Recurring Date Picker"
+              demoLink="https://recurring-date-picker-eight.vercel.app/"
             />
           </Col>
           <Col md={4} className="project-card">
