@@ -12,6 +12,10 @@ import Landing from "../../Assets/Projects/project4.png";
 import Youtube from "../../Assets/Projects/youtube.png";
 import StonePaper from "../../Assets/Projects/stonepaper.png";
 import TicTacToe from "../../Assets/Projects/tictactoe.png";
+import MusicPortfolio from "../../Assets/Projects/MusicPortfolio.png";
+import Roavia from "../../Assets/Projects/Roavia.png";
+import Todo from "../../Assets/Projects/Todo.png";
+import StopWatch from "../../Assets/Projects/StopWatch.png";
 
 function Projects() {
   return (
@@ -43,10 +47,26 @@ function Projects() {
           </Col>
           <Col md={4} className="project-card">
             <ProjectCard
-              imgPath={RecurringDP}
+              imgPath={MusicPortfolio}
               isBlog={false}
-              title="Recurring Date Picker"
-              demoLink="https://recurring-date-picker-eight.vercel.app/"
+              title="Music Portfolio"
+              demoLink="https://music-portfolio-self.vercel.app/"
+            />
+          </Col>
+          <Col md={4} className="project-card">
+            <ProjectCard
+              imgPath={Roavia}
+              isBlog={false}
+              title="Roavia"
+              demoLink="https://roavia.vercel.app/"
+            />
+          </Col>
+          <Col md={4} className="project-card">
+            <ProjectCard
+              imgPath={Todo}
+              isBlog={false}
+              title="Todo App"
+              demoLink="https://todo-sct-wd-4.vercel.app/"
             />
           </Col>
           <Col md={4} className="project-card">
@@ -55,6 +75,23 @@ function Projects() {
               isBlog={false}
               title="Portfolio Website"
               demoLink="https://portfolio-alpha-pearl-78.vercel.app/"
+            />
+          </Col>
+          <Col md={4} className="project-card">
+            <ProjectCard
+              imgPath={StopWatch}
+              isBlog={false}
+              title="Stop Watch"
+              demoLink="https://stop-watch-sct-wd-2.vercel.app/"
+            />
+          </Col>
+          
+          <Col md={4} className="project-card">
+            <ProjectCard
+              imgPath={RecurringDP}
+              isBlog={false}
+              title="Recurring Date Picker"
+              demoLink="https://recurring-date-picker-eight.vercel.app/"
             />
           </Col>
           <Col md={4} className="project-card">

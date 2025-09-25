@@ -8,7 +8,6 @@ import {
   DiCss3,
   DiMysql,
   DiPhp,
-  DiBootstrap,
   DiNodejs,
   DiMongodb,
   DiPython,
@@ -51,10 +50,6 @@ function Techstack() {
   <Col xs={4} md={2} className="tech-icons text-center">
     <DiPhp />
     <div style={{ marginTop: "8px", fontSize: "14px", color: "#555" }}>PHP</div>
-  </Col>
-  <Col xs={4} md={2} className="tech-icons text-center">
-    <DiBootstrap />
-    <div style={{ marginTop: "8px", fontSize: "14px", color: "#555" }}>Bootstrap</div>
   </Col>
   <Col xs={4} md={2} className="tech-icons text-center">
     <DiMongodb />
