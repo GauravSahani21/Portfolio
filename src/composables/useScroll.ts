@@ -31,7 +31,9 @@ export const useScroll = () => {
     }
 
     lenis.value = new Lenis({
-      lerp: 0.08,
+      duration: 2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      autoRaf: false,
     });
 
     lenis.value.on("scroll", handleScroll);

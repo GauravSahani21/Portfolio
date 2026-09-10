@@ -1,5 +1,5 @@
 {
-  "name": "portfolio-2025-2",
+  "name": "gaurav-sahani-portfolio",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -12,6 +12,7 @@
     "env:remove": "shx -- rm -f .env"
   },
   "dependencies": {
+    "@splinetool/runtime": "^2.0.43",
     "gsap": "^3.13.0",
     "howler": "^2.2.4",
     "lenis": "^1.3.11",

@@ -185,6 +185,7 @@ onUnmounted(() => {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: top center;
 
     &-container {
       transition: transform 0.1s ease-in-out;

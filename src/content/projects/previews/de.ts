@@ -1,40 +1,26 @@
-import thumbnailCubeWar from "../../../assets/thumbnails/cubewar.webp";
-import thumbnailQuibbo from "../../../assets/thumbnails/quibbo.webp";
-import thumbnailParticles from "../../../assets/thumbnails/particles.webp";
-import thumbnailPokedex from "../../../assets/thumbnails/pokedex.webp";
-import thumbnailSharkie from "../../../assets/thumbnails/sharkie.webp";
+import thumbnailHealthDiseasePredictor from "../../../assets/thumbnails/health-disease-predictor.webp";
+import thumbnailAutiSense from "../../../assets/thumbnails/autisense.webp";
+import thumbnailCodeForge from "../../../assets/thumbnails/codeforge.webp";
 
 import type { ProjectPreview } from "../../types";
 
 export default [
   {
-    title: "CubeWar",
-    slug: "cubewar",
-    thumbnail: thumbnailCubeWar,
-    description: "Multiplayer-Strategiespiel",
+    title: "Health Disease Predictor",
+    slug: "health-disease-predictor",
+    thumbnail: thumbnailHealthDiseasePredictor,
+    description: "KI-gestützte Gesundheitsanalyseplattform",
   },
   {
-    title: "Quibbo",
-    slug: "quibbo",
-    thumbnail: thumbnailQuibbo,
-    description: "Multiplayer-Gaming-Plattform",
+    title: "AutiSense",
+    slug: "autisense",
+    thumbnail: thumbnailAutiSense,
+    description: "Multimodales KI-Früherkennungssystem für Autismus",
   },
   {
-    title: "Sharkie",
-    slug: "sharkie",
-    thumbnail: thumbnailSharkie,
-    description: "2D-Abenteuerspiel",
-  },
-  {
-    title: "WebGL Partikel",
-    slug: "particles",
-    thumbnail: thumbnailParticles,
-    description: "Dynamische 3D Partikel",
-  },
-  {
-    title: "Pokédex",
-    slug: "pokedex",
-    thumbnail: thumbnailPokedex,
-    description: "Open-Source Lernprojekt",
+    title: "CodeForge",
+    slug: "codeforge",
+    thumbnail: thumbnailCodeForge,
+    description: "Kompetitive Coding- & Cloud-Lernplattform der nächsten Generation",
   },
 ] as const satisfies ProjectPreview[];

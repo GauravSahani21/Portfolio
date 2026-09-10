@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gaurav Sahani - Resume</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #1a1a1a;
+      background: #f7f7f7;
+      padding: 40px 20px;
+      line-height: 1.5;
+    }
+    .resume-container {
+      max-width: 820px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 48px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      border-radius: 8px;
+    }
+    header {
+      border-bottom: 2px solid #222;
+      padding-bottom: 20px;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+    h1 { font-size: 32px; letter-spacing: 0.05em; margin-bottom: 6px; }
+    .contact-info {
+      font-size: 13px;
+      color: #555;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 8px;
+    }
+    .contact-info a { color: #d9531e; text-decoration: none; font-weight: 500; }
+    section { margin-bottom: 22px; }
+    h2 {
+      font-size: 15px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 4px;
+      margin-bottom: 12px;
+      color: #222;
+    }
+    p, li { font-size: 13.5px; color: #333; }
+    ul { list-style: disc; margin-left: 20px; }
+    li { margin-bottom: 5px; }
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      font-weight: 700;
+      margin-bottom: 3px;
+    }
+    .item-sub {
+      display: flex;
+      justify-content: space-between;
+      color: #555;
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+    .skills-category { margin-bottom: 6px; font-size: 13.5px; }
+    .skills-category strong { color: #111; }
+    .badge {
+      display: inline-block;
+      background: #f0f0f0;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-right: 4px;
+      color: #333;
+    }
+    @media print {
+      body { background: #fff; padding: 0; }
+      .resume-container { box-shadow: none; padding: 20px; max-width: 100%; }
+      .no-print { display: none; }
+    }
+    .btn-print {
+      display: block;
+      margin: 0 auto 20px;
+      padding: 10px 24px;
+      background: #ff6b35;
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <button class="btn-print no-print" onclick="window.print()">🖨️ Print / Save as PDF</button>
+  <div class="resume-container">
+    <header>
+      <h1>GAURAV SAHANI</h1>
+      <p style="font-size: 13px; color: #666;">Surya Mansion, Ayyappa Nagar, Hoodi, Bengaluru - 560048</p>
+      <div class="contact-info">
+        <span>📞 +91 8605219388</span>
+        <span>✉️ <a href="mailto:gauravsahani010@gmail.com">gauravsahani010@gmail.com</a></span>
+        <span>🔗 <a href="#">LinkedIn</a></span>
+        <span>🐙 <a href="#">GitHub</a></span>
+        <span>⚡ <a href="#">LeetCode</a></span>
+      </div>
+    </header>
+
+    <section>
+      <h2>Summary</h2>
+      <p>Software Developer (Fresher) with a strong foundation in Data Structures &amp; Algorithms, Object-Oriented Programming, and core Computer Science fundamentals. Hands-on experience across the full Software Development Life Cycle (SDLC) – designing, developing, testing, and deploying scalable, real-time web applications using the MERN stack (MongoDB, Express.js, React.js, Node.js). Proficient in RESTful API design and development, JWT-based authentication &amp; authorization, relational and NoSQL database design, and version control (Git/GitHub). Strong analytical and problem-solving skills, with 230+ LeetCode problems solved, seeking a Software Developer role to build efficient, maintainable, production-grade software.</p>
+    </section>
+
+    <section>
+      <h2>Education</h2>
+      <div style="margin-bottom: 14px;">
+        <div class="item-header">
+          <span>CMR Institute of Technology</span>
+          <span>2025 – 2027 (Pursuing)</span>
+        </div>
+        <div class="item-sub">
+          <span>Master of Computer Applications (MCA) – <strong>CGPA: 8.22</strong></span>
+          <span>Bengaluru, India</span>
+        </div>
+      </div>
+      <div>
+        <div class="item-header">
+          <span>Don Bosco College</span>
+          <span>2022 – 2025</span>
+        </div>
+        <div class="item-sub">
+          <span>Bachelor of Computer Applications (BCA) – <strong>CGPA: 7.08</strong></span>
+          <span>Panjim, Goa</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Technical Skills</h2>
+      <p class="skills-category"><strong>Programming Languages:</strong> Java, C++, JavaScript (ES6+), Python, SQL</p>
+      <p class="skills-category"><strong>Web / Software Development:</strong> React.js, Redux, Node.js, Express.js, HTML5, CSS3, Tailwind CSS, Responsive Web Design</p>
+      <p class="skills-category"><strong>API &amp; Backend Development:</strong> RESTful APIs, JWT Authentication &amp; Authorization, Microservices Basics</p>
+      <p class="skills-category"><strong>Databases:</strong> MongoDB, MySQL, Oracle, Redis, Database Design</p>
+      <p class="skills-category"><strong>Tools &amp; Platforms:</strong> Git, GitHub, VS Code, Eclipse, npm, Postman</p>
+      <p class="skills-category"><strong>Core Concepts:</strong> Data Structures &amp; Algorithms (DSA), OOPs, SDLC, Agile Methodology, Problem Solving</p>
+      <p class="skills-category"><strong>Operating Systems:</strong> MacOS, Windows</p>
+    </section>
+
+    <section>
+      <h2>Projects</h2>
+      <div style="margin-bottom: 14px;">
+        <div class="item-header">
+          <span>Intelligent Health Disease Predictor</span>
+          <span style="font-weight: 500; font-size: 12.5px; color: #666;">React.js, Node.js, Express.js, MongoDB, JWT, ML</span>
+        </div>
+        <ul>
+          <li>Engineered a full-stack, ML-integrated health prediction system analyzing user symptoms, medical reports, and skin images to identify possible diseases, achieving <strong>92% prediction accuracy</strong>.</li>
+          <li>Designed and developed RESTful APIs to connect a React.js front end with a Node.js/Express.js backend, delivering real-time prediction results and healthcare recommendations.</li>
+          <li>Implemented secure JWT-based authentication and prediction-history tracking, ensuring safe, role-based access to user data.</li>
+        </ul>
+      </div>
+      <div>
+        <div class="item-header">
+          <span>CodeForge – Online Coding Platform</span>
+          <span style="font-weight: 500; font-size: 12.5px; color: #666;">MERN Stack, MongoDB, Redis, JWT</span>
+        </div>
+        <ul>
+          <li>Built a full-stack software application with an in-browser code editor supporting multi-language code execution and automated grading of coding challenges.</li>
+          <li>Architected secure authentication, problem-submission pipelines, leaderboards, and coding-streak tracking using JWT, MongoDB, and Redis for low-latency data access.</li>
+          <li>Developed an interactive learning hub and practice environment to help users strengthen DSA and problem-solving skills, improving user engagement.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Technical Achievements</h2>
+      <ul>
+        <li>Designed, built, and published <strong>create-mern-pro</strong>, an open-source npm CLI package that automates MERN stack project scaffolding, cutting developer setup time and averaging <strong>200+ weekly downloads</strong>.</li>
+        <li>Built a Node.js-based CLI automation tool to eliminate repetitive boilerplate code and standardize project structure across new builds.</li>
+        <li>Solved <strong>230+ Data Structures &amp; Algorithms problems</strong> on LeetCode, strengthening core problem-solving and coding-interview readiness.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Certifications &amp; Hackathons</h2>
+      <ul>
+        <li><strong>Certifications:</strong> Operating Systems – Scaler; SQL (Intermediate) – HackerRank; JavaScript Algorithms and Data Structures – freeCodeCamp.</li>
+        <li><strong>Hackathons:</strong> Stackathon 2025 – Full Stack Development Hackathon, CMRIT; “How Gen AI Can Help Indian Police” Hackathon 2025; Sustain-A-Thon 2026 – Data-Driven Sustainability Hackathon, CMRIT.</li>
+      </ul>
+    </section>
+  </div>
+</body>
+</html>

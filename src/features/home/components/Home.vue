@@ -4,8 +4,8 @@ import Hero from "./Hero.vue";
 import About from "./About.vue";
 //import AboutSections from "../features/about/Sections.vue";
 import Projects from "./Projects.vue";
+import TechStack from "./TechStack.vue";
 import Contact from "./Contact.vue";
-import Footer from "../../../components/Footer.vue";
 import { ref, onMounted, onUnmounted, watchEffect, computed, watch } from "vue";
 import { three } from "../../../three";
 import { animations } from "../../../animations";
@@ -158,12 +158,13 @@ watch(
         <div class="about-spacer" ref="aboutSpacerRef" id="about"></div>
       </div>
       <Projects id="projects" @loaded="handleProjectsLoaded" />
+      <TechStack id="tech-stack" v-if="projectsLoaded" />
       <div ref="contactRef" class="home-contact">
         <Contact id="contact" v-if="projectsLoaded" />
       </div>
-      <Footer :withSocial="false"></Footer>
     </Layout>
   </div>
+
   <HeaderHome v-if="projectsLoaded" />
 </template>
 

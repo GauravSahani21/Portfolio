@@ -13,7 +13,9 @@ import SoundsToggle from "./SoundsToggle.vue";
 import { isFeatureEnabled } from "../utils/features";
 import { useRouter } from "../composables/useRouter";
 import { useFirstRoute } from "../composables/useFirstRoute";
+import NavMenu from "./NavMenu.vue";
 
+const isMenuOpen = ref(false);
 const router = useRouter();
 const { isFirstRoute } = useFirstRoute();
 
@@ -108,8 +110,24 @@ const getInTouchClassNames = computed(() => {
         >{{ t("get-in-touch") }}</Button
       >
       <SoundsToggle class="header-sounds-toggle" :isDarkTheme="isDarkTheme" v-if="isFeatureEnabled('sounds')" />
+      <button
+        class="menu-toggle-btn cursor-can-hover"
+        :class="{ 'menu-toggle-btn-active': isMenuOpen }"
+        @click="isMenuOpen = !isMenuOpen"
+        :aria-label="isMenuOpen ? 'Close menu' : 'Open menu'"
+        :aria-expanded="isMenuOpen"
+        data-sound="click"
+        data-hoversound="hover"
+      >
+        <span class="menu-toggle-text">
+          <span class="menu-label" :class="{ 'menu-label-hidden': isMenuOpen }">Menu</span>
+          <span class="menu-label" :class="{ 'menu-label-hidden': !isMenuOpen }">Close</span>
+        </span>
+        <span class="burger" :class="{ 'burgerActive': isMenuOpen }" />
+      </button>
     </div>
   </header>
+  <NavMenu :isOpen="isMenuOpen" @close="isMenuOpen = false" />
 </template>
 
 <style scoped lang="scss">
@@ -232,6 +250,103 @@ const getInTouchClassNames = computed(() => {
       @include mixins.mq("md") {
         font-size: 20px;
       }
+    }
+  }
+}
+
+.menu-toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  padding: 8px 16px;
+  cursor: pointer;
+  color: var(--color-white-400, #ffffff);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  pointer-events: auto;
+  transition: background-color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.16);
+    border-color: rgba(255, 255, 255, 0.35);
+  }
+
+  &-active {
+    background: rgba(255, 255, 255, 0.22);
+    border-color: rgba(255, 255, 255, 0.45);
+  }
+
+  // Hide on desktop — desktop nav (HeaderHome pill) handles navigation there
+  @include mixins.mq("lg") {
+    display: none;
+  }
+}
+
+.menu-toggle-text {
+  position: relative;
+  display: inline-block;
+  height: 16px;
+  min-width: 44px;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  overflow: hidden;
+}
+
+.menu-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1), opacity 0.3s ease;
+
+  &-hidden {
+    opacity: 0;
+    transform: translateY(100%);
+    pointer-events: none;
+  }
+}
+
+.burger {
+  width: 20px;
+  height: 12px;
+  position: relative;
+  display: block;
+  pointer-events: none;
+
+  &::after,
+  &::before {
+    content: '';
+    height: 2px;
+    width: 100%;
+    background-color: currentColor;
+    position: absolute;
+    left: 0;
+    display: block;
+    border-radius: 2px;
+    transition: transform 0.6s cubic-bezier(0.76, 0, 0.24, 1), top 0.6s cubic-bezier(0.76, 0, 0.24, 1);
+  }
+
+  &::before {
+    top: 2px;
+  }
+
+  &::after {
+    top: 8px;
+  }
+
+  &.burgerActive {
+    &::after {
+      transform: rotate(45deg);
+      top: 5px;
+    }
+
+    &::before {
+      transform: rotate(-45deg);
+      top: 5px;
     }
   }
 }

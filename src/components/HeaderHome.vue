@@ -86,7 +86,7 @@ onMounted(() => {
         data-sound="click"
         data-hoversound="hover"
       >
-        {{ t(section) }}
+        {{ ariaLabels[section] }}
       </HeaderLink>
     </div>
   </div>

@@ -1,40 +1,26 @@
-import thumbnailCubeWar from "../../../assets/thumbnails/cubewar.webp";
-import thumbnailQuibbo from "../../../assets/thumbnails/quibbo.webp";
-import thumbnailParticles from "../../../assets/thumbnails/particles.webp";
-import thumbnailPokedex from "../../../assets/thumbnails/pokedex.webp";
-import thumbnailSharkie from "../../../assets/thumbnails/sharkie.webp";
+import thumbnailHealthDiseasePredictor from "../../../assets/thumbnails/health-disease-predictor.webp";
+import thumbnailAutiSense from "../../../assets/thumbnails/autisense.webp";
+import thumbnailCodeForge from "../../../assets/thumbnails/codeforge.webp";
 
 import type { ProjectPreview } from "../../types";
 
 export default [
   {
-    title: "CubeWar",
-    slug: "cubewar",
-    thumbnail: thumbnailCubeWar,
-    description: "Multiplayer strategy game",
+    title: "Health Disease Predictor",
+    slug: "health-disease-predictor",
+    thumbnail: thumbnailHealthDiseasePredictor,
+    description: "AI-powered health analysis platform",
   },
   {
-    title: "Quibbo",
-    slug: "quibbo",
-    thumbnail: thumbnailQuibbo,
-    description: "Multiplayer gaming platform",
+    title: "AutiSense",
+    slug: "autisense",
+    thumbnail: thumbnailAutiSense,
+    description: "Multi-modal AI early autism detection system",
   },
   {
-    title: "Sharkie",
-    slug: "sharkie",
-    thumbnail: thumbnailSharkie,
-    description: "2D adventure game",
-  },
-  {
-    title: "WebGL Particles",
-    slug: "particles",
-    thumbnail: thumbnailParticles,
-    description: "Dynamic 3D particles",
-  },
-  {
-    title: "Pokédex",
-    slug: "pokedex",
-    thumbnail: thumbnailPokedex,
-    description: "Open-source learning project",
+    title: "CodeForge",
+    slug: "codeforge",
+    thumbnail: thumbnailCodeForge,
+    description: "Next-gen competitive coding & cloud learning platform",
   },
 ] as const satisfies ProjectPreview[];
