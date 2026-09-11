@@ -19,10 +19,18 @@ const emptyVector = new Vector3();
 const init = (_canvas: HTMLCanvasElement | null) => {
   if (instance) return;
   canvas = _canvas;
+  const isMobile =
+    typeof window !== "undefined" &&
+    ("ontouchstart" in window ||
+      navigator.maxTouchPoints > 0 ||
+      (window.matchMedia && window.matchMedia("(pointer: coarse)").matches) ||
+      window.innerWidth <= 768);
+
   instance = new WebGLRenderer({
     canvas: canvas!,
-    antialias: true,
+    antialias: !isMobile,
     alpha: false,
+    powerPreference: "high-performance",
   });
 
   gsap.ticker.add(tick);

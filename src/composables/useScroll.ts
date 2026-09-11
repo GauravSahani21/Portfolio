@@ -30,10 +30,19 @@ export const useScroll = () => {
       lenis.value.off("scroll", handleScroll);
     }
 
+    const isMobile =
+      typeof window !== "undefined" &&
+      ("ontouchstart" in window ||
+        navigator.maxTouchPoints > 0 ||
+        (window.matchMedia && window.matchMedia("(pointer: coarse)").matches) ||
+        window.innerWidth <= 768);
+
     lenis.value = new Lenis({
-      duration: 2,
+      duration: isMobile ? 0 : 2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       autoRaf: false,
+      syncTouch: false,
+      smoothWheel: !isMobile,
     });
 
     lenis.value.on("scroll", handleScroll);
@@ -41,7 +50,19 @@ export const useScroll = () => {
 
   onMounted(() => {
     gsap.ticker.add(tick);
-    gsap.ticker.lagSmoothing(0);
+
+    const isMobile =
+      typeof window !== "undefined" &&
+      ("ontouchstart" in window ||
+        navigator.maxTouchPoints > 0 ||
+        (window.matchMedia && window.matchMedia("(pointer: coarse)").matches) ||
+        window.innerWidth <= 768);
+
+    if (!isMobile) {
+      gsap.ticker.lagSmoothing(0);
+    } else {
+      gsap.ticker.lagSmoothing(500, 33);
+    }
 
     createNewLenis();
   });

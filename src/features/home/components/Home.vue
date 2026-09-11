@@ -80,6 +80,19 @@ const updateCursor = () => {
   }
 };
 
+const canvasInView = ref(true);
+const canvasObserver = ref<IntersectionObserver | null>(null);
+
+const updateRendererActive = () => {
+  if (projectVisible.value) {
+    renderer.setIsActive(false);
+  } else if (isTouch.value) {
+    renderer.setIsActive(canvasInView.value);
+  } else {
+    renderer.setIsActive(true);
+  }
+};
+
 onMounted(() => {
   stickyObserver.value = new IntersectionObserver(handleIntersection);
   stickyObserver.value.observe(introRef.value as HTMLElement);
@@ -89,18 +102,34 @@ onMounted(() => {
     threeInitialized.value = true;
   }
 
-  gsap.ticker.add(updateCursor);
+  if (isTouch.value && threeCanvasRef.value) {
+    canvasObserver.value = new IntersectionObserver(([entry]) => {
+      if (entry) {
+        canvasInView.value = entry.isIntersecting;
+      }
+    });
+    canvasObserver.value.observe(threeCanvasRef.value);
+  }
+
+  if (!isTouch.value) {
+    gsap.ticker.add(updateCursor);
+  }
 });
 
 onUnmounted(() => {
   stickyObserver.value?.disconnect();
   stickyObserver.value = null;
 
+  canvasObserver.value?.disconnect();
+  canvasObserver.value = null;
+
   three.destroy();
 
   document.documentElement.style.cursor = "";
 
-  gsap.ticker.remove(updateCursor);
+  if (!isTouch.value) {
+    gsap.ticker.remove(updateCursor);
+  }
   animations.destroy();
 });
 
@@ -123,13 +152,7 @@ watchEffect((onInvalidate) => {
   });
 });
 
-watch(
-  projectVisible,
-  (newVal) => {
-    renderer.setIsActive(!newVal);
-  },
-  { immediate: true },
-);
+watch([projectVisible, canvasInView], updateRendererActive, { immediate: true });
 </script>
 
 <template>

@@ -20,7 +20,13 @@ class ThreeSizes extends EventEmitter<{
     if (!rect || !rect.width || !rect.height) return;
     this.width = rect?.width ?? 0;
     this.height = rect?.height ?? 0;
-    this.pixelRatio = Math.min(window.devicePixelRatio, 2);
+    const isMobile =
+      typeof window !== "undefined" &&
+      ("ontouchstart" in window ||
+        navigator.maxTouchPoints > 0 ||
+        (window.matchMedia && window.matchMedia("(pointer: coarse)").matches) ||
+        window.innerWidth <= 768);
+    this.pixelRatio = isMobile ? Math.min(window.devicePixelRatio, 1) : Math.min(window.devicePixelRatio, 2);
     this.emit("resize", { width: this.width, height: this.height, pixelRatio: this.pixelRatio });
   }
 
