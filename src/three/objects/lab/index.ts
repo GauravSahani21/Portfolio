@@ -10,6 +10,7 @@ import { DigitalNumbers } from "../digital-numbers";
 import { aboutProgress } from "../../../animations/transitions/about";
 import gsap from "gsap";
 import { renderer } from "../../core/renderer";
+import { sceneWeights } from "../../../animations/scenes";
 
 import type { Object3D } from "three";
 
@@ -70,7 +71,9 @@ const init = () => {
 };
 
 const tick = () => {
-  if (!renderer.getIsActive() || !aboutNumbers) return;
+  if (!renderer.getIsActive()) return;
+  group.visible = sceneWeights.about > 0.001;
+  if (!group.visible || !aboutNumbers) return;
   const value = Math.floor(aboutProgress.value * 100);
   aboutNumbers.updateFrames(value);
 };

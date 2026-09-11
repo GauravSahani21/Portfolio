@@ -199,10 +199,13 @@ const updateContact = () => {
   setWeight("desktop-idle", 0);
   setWeight("left-desktop", 0);
   setWeight("t-idle", 0);
-  setWeight("sleeping", 1);
-  setWeight("contact-idle", 1);
-  setWeight("wake-up", 1);
   setWeight("wave", 0);
+
+  if (!isAwake) {
+    setWeight("sleeping", 1);
+    setWeight("contact-idle", 0);
+    setWeight("wake-up", 0);
+  }
 };
 
 const update = () => {
@@ -215,7 +218,9 @@ const update = () => {
 
   const delta = gsap.ticker.deltaRatio(60);
   mixer.update(delta / 60);
-  hologramMixer.update(delta / 60);
+  if (sceneWeights.about > 0.001) {
+    hologramMixer.update(delta / 60);
+  }
 };
 
 export const animations = { init, play, actions, update, wakeUp, getIsAwake: () => isAwake, wave };

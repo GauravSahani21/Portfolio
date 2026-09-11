@@ -3,6 +3,7 @@ import gsap from "gsap";
 import { uniforms as hologramUniforms } from "../avatar/hologram-material";
 import { resources } from "../../../utils/resources";
 import { renderer } from "../../core/renderer";
+import { sceneWeights } from "../../../animations/scenes";
 
 let plane: Mesh | null = null;
 
@@ -40,6 +41,7 @@ const init = () => {
 
 const tick = () => {
   if (!renderer.getIsActive() || !plane) return;
+  if (sceneWeights.about < 0.001) return;
 
   const progress = hologramUniforms.uProgress.value;
   const yPosition = START_Y + progress * (END_Y - START_Y);

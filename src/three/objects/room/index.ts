@@ -88,14 +88,17 @@ const initObjects = () => {
 
 const tick = () => {
   if (!renderer.getIsActive()) return;
-  group.visible = sceneWeights.hero > 0.001;
+  const isHero = sceneWeights.hero > 0.001;
+  group.visible = isHero;
 
-  if (objects?.chair) {
-    objects.chair.rotation.copy(chairScrollRotation);
+  if (isHero) {
+    if (objects?.chair) {
+      objects.chair.rotation.copy(chairScrollRotation);
+    }
+
+    penguin.tick();
+    music.tick();
   }
-
-  penguin.tick();
-  music.tick();
 };
 
 const destroy = () => {

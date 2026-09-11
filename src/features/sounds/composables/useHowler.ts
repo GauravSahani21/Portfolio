@@ -83,7 +83,7 @@ export const useHowler = () => {
   };
 
   onMounted(() => {
-    if (!isFeatureEnabled("sounds")) return;
+    if (!isFeatureEnabled("sounds") || isTouch.value) return;
     Howler.volume(0);
 
     if (howlerUnlocked.value) {

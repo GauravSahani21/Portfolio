@@ -198,6 +198,7 @@ watch([projectVisible, canvasInView], updateRendererActive, { immediate: true })
   max-height: calc(var(--lvh) * 100);
   position: relative;
   overflow: hidden;
+  pointer-events: none;
 
   &-contact {
     position: absolute;
@@ -206,6 +207,7 @@ watch([projectVisible, canvasInView], updateRendererActive, { immediate: true })
     width: 100%;
     height: calc(var(--lvh) * 100);
     max-height: calc(var(--lvh) * 100);
+    pointer-events: none;
   }
 }
 
@@ -243,7 +245,6 @@ watch([projectVisible, canvasInView], updateRendererActive, { immediate: true })
   &-contact {
     width: 100%;
     min-height: calc(var(--lvh) * 100);
-    max-height: calc(var(--lvh) * 100);
   }
 }
 

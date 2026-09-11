@@ -85,7 +85,9 @@ const tick = () => {
     }
   }
 
-  updateParallax(parallaxGroup);
+  if (!isTouch()) {
+    updateParallax(parallaxGroup);
+  }
 
   if (isContact) {
     calculateContactTransform();

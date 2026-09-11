@@ -45,6 +45,7 @@ const init = () => {
 
 const tick = () => {
   if (!renderer.getIsActive() || !mesh || !(mesh.material instanceof ShaderMaterial)) return;
+  if (sceneWeightsInOut.about.in < 0.001) return;
 
   mesh.material.uniforms.uOpacity!.value = 0.2 + 0.8 * sceneWeightsInOut.about.in;
   mesh.material.uniforms.uTime!.value = gsap.ticker.time;

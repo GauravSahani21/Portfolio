@@ -3,10 +3,12 @@ import { ref, onMounted, onUnmounted } from "vue";
 import { Application, type SplineEvent } from "@splinetool/runtime";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useAgent } from "../../../composables/useAgent";
 
 
 gsap.registerPlugin(ScrollTrigger);
 
+const { isTouch } = useAgent();
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -204,25 +206,31 @@ const runKeyboardEntryAnimation = async () => {
     mobileKeyCaps.forEach((keycap) => {
       keycap.visible = true;
     });
+
+    // On mobile, show keycaps immediately without 50 staggered bounce.out GSAP tweens
+    keycaps.forEach((keycap) => {
+      keycap.visible = true;
+      keycap.position.y = 50;
+    });
   } else {
     const desktopKeyCaps = allObjects.filter((obj) => obj.name === "keycap-desktop");
     desktopKeyCaps.forEach(async (keycap, idx) => {
       await sleep(idx * 70);
       keycap.visible = true;
     });
-  }
 
-  // Keycaps drop-and-bounce entry
-  keycaps.forEach(async (keycap, idx) => {
-    keycap.visible = false;
-    await sleep(idx * 70);
-    keycap.visible = true;
-    gsap.fromTo(
-      keycap.position,
-      { y: 200 },
-      { y: 50, duration: 0.5, delay: 0.1, ease: "bounce.out" }
-    );
-  });
+    // Keycaps drop-and-bounce entry
+    keycaps.forEach(async (keycap, idx) => {
+      keycap.visible = false;
+      await sleep(idx * 70);
+      keycap.visible = true;
+      gsap.fromTo(
+        keycap.position,
+        { y: 200 },
+        { y: 50, duration: 0.5, delay: 0.1, ease: "bounce.out" }
+      );
+    });
+  }
 
   // Hide 3D text meshes completely
   const textDesktopLight = splineApp.findObjectByName("text-desktop");
@@ -268,37 +276,46 @@ const loadSpline = async () => {
     if (textDesktopDark) textDesktopDark.visible = false;
     if (textDesktopLight) textDesktopLight.visible = false;
 
-    // Event listeners on Spline elements
-    splineApp.addEventListener("mouseHover", (e: SplineEvent) => {
-      if (!splineApp || !e.target?.name) return;
-      const targetName = e.target.name.toLowerCase();
+    // On touch devices, disable camera controls so user touch scrolls the page smoothly
+    if (isTouch.value && splineApp.controls) {
+      try {
+        splineApp.controls.enabled = false;
+      } catch {}
+    }
 
-      // Leaving a key area to background/platform
-      if (targetName === "body" || targetName === "platform") {
-        if (currentHoveredSkillName !== null) {
-          playReleaseSound();
-          currentHoveredSkillName = null;
-        }
-        return;
-      }
+    // Event listeners on Spline elements (desktop only - saves massive raycasting overhead on mobile)
+    if (!isTouch.value) {
+      splineApp.addEventListener("mouseHover", (e: SplineEvent) => {
+        if (!splineApp || !e.target?.name) return;
+        const targetName = e.target.name.toLowerCase();
 
-      // Only trigger sound once when entering a new key
-      if (currentHoveredSkillName !== targetName) {
-        if (currentHoveredSkillName !== null) {
-          playReleaseSound();
+        // Leaving a key area to background/platform
+        if (targetName === "body" || targetName === "platform") {
+          if (currentHoveredSkillName !== null) {
+            playReleaseSound();
+            currentHoveredSkillName = null;
+          }
+          return;
         }
+
+        // Only trigger sound once when entering a new key
+        if (currentHoveredSkillName !== targetName) {
+          if (currentHoveredSkillName !== null) {
+            playReleaseSound();
+          }
+          playPressSound();
+          currentHoveredSkillName = targetName;
+        }
+      });
+
+      splineApp.addEventListener("keyDown", () => {
         playPressSound();
-        currentHoveredSkillName = targetName;
-      }
-    });
+      });
 
-    splineApp.addEventListener("keyDown", () => {
-      playPressSound();
-    });
-
-    splineApp.addEventListener("keyUp", () => {
-      playReleaseSound();
-    });
+      splineApp.addEventListener("keyUp", () => {
+        playReleaseSound();
+      });
+    }
 
     // Run entry animation when section scrolls into view
     if (sectionRef.value) {
@@ -331,9 +348,18 @@ onMounted(() => {
         startParticles();
         if (!hasLoadedSpline) {
           loadSpline();
+        } else if (splineApp) {
+          try {
+            splineApp.play();
+          } catch {}
         }
       } else {
         stopParticles();
+        if (splineApp) {
+          try {
+            splineApp.stop();
+          } catch {}
+        }
       }
     },
     { rootMargin: "300px" }
@@ -471,9 +497,25 @@ onUnmounted(() => {
   height: 100%;
   outline: none;
   cursor: grab;
+  touch-action: pan-y;
 
   &:active {
     cursor: grabbing;
+  }
+}
+
+@media (max-width: 768px) {
+  .keyboard-canvas-stage {
+    height: 52vh;
+    min-height: 380px;
+  }
+
+  .keyboard-canvas {
+    pointer-events: none;
+  }
+
+  .tech-stack-hint {
+    display: none;
   }
 }
 
@@ -504,6 +546,5 @@ onUnmounted(() => {
     transform: rotate(360deg);
   }
 }
-
 
 </style>
