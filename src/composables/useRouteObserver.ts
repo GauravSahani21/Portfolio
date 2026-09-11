@@ -12,7 +12,7 @@ export const path = ref(typeof window !== "undefined" ? window.location.pathname
 // -----------------------------------------------------------------------------
 
 export const isProjectRoute = (path: string) => {
-  return path.match(/^\/project\/([^/]+)$/);
+  return path.match(/^\/project\/([^/]+)\/?$/);
 };
 
 export const projectId = computed(() => {

@@ -1,6 +1,7 @@
 import thumbnailHealthDiseasePredictor from "../../../assets/thumbnails/health-disease-predictor.webp";
 import thumbnailAutiSense from "../../../assets/thumbnails/autisense.webp";
 import thumbnailCodeForge from "../../../assets/thumbnails/codeforge.webp";
+import thumbnailCreateMernPro from "../../../assets/thumbnails/create-mern-pro.webp";
 
 import type { ProjectPreview } from "../../types";
 
@@ -22,5 +23,11 @@ export default [
     slug: "codeforge",
     thumbnail: thumbnailCodeForge,
     description: "Next-gen competitive coding & cloud learning platform",
+  },
+  {
+    title: "create-mern-pro",
+    slug: "create-mern-pro",
+    thumbnail: thumbnailCreateMernPro,
+    description: "Production-ready MERN stack scaffolding CLI tool",
   },
 ] as const satisfies ProjectPreview[];
