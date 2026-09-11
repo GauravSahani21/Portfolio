@@ -4,6 +4,7 @@ import thumbnailCodeForge from "../../../assets/thumbnails/codeforge.webp";
 import thumbnailCreateMernPro from "../../../assets/thumbnails/create-mern-pro.webp";
 import thumbnailSmartStorage from "../../../assets/thumbnails/smartstorage.webp";
 import thumbnailConnectUp from "../../../assets/thumbnails/connectup.webp";
+import thumbnailPhotoSorter from "../../../assets/thumbnails/photo-sorter.webp";
 
 import type { ProjectPreview } from "../../types";
 
@@ -43,5 +44,11 @@ export default [
     slug: "connectup",
     thumbnail: thumbnailConnectUp,
     description: "Real-time chat & WebRTC video calling platform with Gemini AI",
+  },
+  {
+    title: "Photo Sorter",
+    slug: "photo-sorter",
+    thumbnail: thumbnailPhotoSorter,
+    description: "Rapid photo triage & album organization app with keyboard navigation",
   },
 ] as const satisfies ProjectPreview[];
