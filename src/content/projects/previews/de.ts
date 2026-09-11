@@ -2,6 +2,8 @@ import thumbnailHealthDiseasePredictor from "../../../assets/thumbnails/health-d
 import thumbnailAutiSense from "../../../assets/thumbnails/autisense.webp";
 import thumbnailCodeForge from "../../../assets/thumbnails/codeforge.webp";
 import thumbnailCreateMernPro from "../../../assets/thumbnails/create-mern-pro.webp";
+import thumbnailSmartStorage from "../../../assets/thumbnails/smartstorage.webp";
+import thumbnailConnectUp from "../../../assets/thumbnails/connectup.webp";
 
 import type { ProjectPreview } from "../../types";
 
@@ -29,5 +31,17 @@ export default [
     slug: "create-mern-pro",
     thumbnail: thumbnailCreateMernPro,
     description: "Produktionsreifes MERN-Stack-Scaffolding-CLI-Tool",
+  },
+  {
+    title: "SmartStorage",
+    slug: "smartstorage",
+    thumbnail: thumbnailSmartStorage,
+    description: "KI-gestützter akademischer Dokumententresor für Studierende",
+  },
+  {
+    title: "ConnectUp",
+    slug: "connectup",
+    thumbnail: thumbnailConnectUp,
+    description: "Echtzeit-Chat- & WebRTC-Videoanrufplattform mit Gemini-KI",
   },
 ] as const satisfies ProjectPreview[];

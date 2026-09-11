@@ -2,6 +2,8 @@ import thumbnailHealthDiseasePredictor from "../../../assets/thumbnails/health-d
 import thumbnailAutiSense from "../../../assets/thumbnails/autisense.webp";
 import thumbnailCodeForge from "../../../assets/thumbnails/codeforge.webp";
 import thumbnailCreateMernPro from "../../../assets/thumbnails/create-mern-pro.webp";
+import thumbnailSmartStorage from "../../../assets/thumbnails/smartstorage.webp";
+import thumbnailConnectUp from "../../../assets/thumbnails/connectup.webp";
 
 import type { ProjectPreview } from "../../types";
 
@@ -29,5 +31,17 @@ export default [
     slug: "create-mern-pro",
     thumbnail: thumbnailCreateMernPro,
     description: "Production-ready MERN stack scaffolding CLI tool",
+  },
+  {
+    title: "SmartStorage",
+    slug: "smartstorage",
+    thumbnail: thumbnailSmartStorage,
+    description: "AI-powered academic document vault & DigiLocker for students",
+  },
+  {
+    title: "ConnectUp",
+    slug: "connectup",
+    thumbnail: thumbnailConnectUp,
+    description: "Real-time chat & WebRTC video calling platform with Gemini AI",
   },
 ] as const satisfies ProjectPreview[];
