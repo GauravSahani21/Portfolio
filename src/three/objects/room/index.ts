@@ -10,6 +10,7 @@ import { mouse } from "./mouse";
 import { messagePopup } from "./message-popup";
 import { penguin } from "./penguin";
 import { music } from "./music";
+import { renderer } from "../../core/renderer";
 
 import type { Object3D } from "three";
 
@@ -86,6 +87,7 @@ const initObjects = () => {
 };
 
 const tick = () => {
+  if (!renderer.getIsActive()) return;
   group.visible = sceneWeights.hero > 0.001;
 
   if (objects?.chair) {

@@ -9,6 +9,7 @@ import { labPlane } from "./plane";
 import { DigitalNumbers } from "../digital-numbers";
 import { aboutProgress } from "../../../animations/transitions/about";
 import gsap from "gsap";
+import { renderer } from "../../core/renderer";
 
 import type { Object3D } from "three";
 
@@ -69,7 +70,7 @@ const init = () => {
 };
 
 const tick = () => {
-  if (!aboutNumbers) return;
+  if (!renderer.getIsActive() || !aboutNumbers) return;
   const value = Math.floor(aboutProgress.value * 100);
   aboutNumbers.updateFrames(value);
 };

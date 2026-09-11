@@ -7,6 +7,7 @@ import { contact } from ".";
 import { resources } from "../../../utils/resources";
 import { sceneWeights } from "../../../animations/scenes";
 import { lerp } from "../../../utils/math";
+import { renderer } from "../../core/renderer";
 
 import type { BufferGeometry } from "three";
 
@@ -79,7 +80,7 @@ const hide = () => {
 };
 
 const tick = () => {
-  if (!mesh) return;
+  if (!renderer.getIsActive() || !mesh) return;
 
   const progress = sceneWeights.contact;
   if (progress < 0.001) {

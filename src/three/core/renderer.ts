@@ -123,4 +123,4 @@ const destroy = () => {
   visible = true;
 };
 
-export const renderer = { init, destroy, getInstance, compile, setIsActive };
+export const renderer = { init, destroy, getInstance, compile, setIsActive, getIsActive: () => isActive };

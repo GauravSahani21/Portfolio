@@ -6,6 +6,7 @@ import gsap from "gsap";
 import { sceneWeightsInOut } from "../../../animations/scenes";
 import { aboutProgress } from "../../../animations/transitions/about";
 import { lab } from "../lab";
+import { renderer } from "../../core/renderer";
 
 let mesh: Mesh | null = null;
 let geometry: PlaneGeometry | null = null;
@@ -43,7 +44,7 @@ const init = () => {
 };
 
 const tick = () => {
-  if (!mesh || !(mesh.material instanceof ShaderMaterial)) return;
+  if (!renderer.getIsActive() || !mesh || !(mesh.material instanceof ShaderMaterial)) return;
 
   mesh.material.uniforms.uOpacity!.value = 0.2 + 0.8 * sceneWeightsInOut.about.in;
   mesh.material.uniforms.uTime!.value = gsap.ticker.time;

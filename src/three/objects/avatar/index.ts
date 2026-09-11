@@ -12,6 +12,7 @@ import headVertexShader from "../../shaders/avatar-head/vertex.glsl";
 import headFragmentShader from "../../shaders/avatar-head/fragment.glsl";
 import gsap from "gsap";
 import { aboutProgress } from "../../../animations/transitions/about";
+import { renderer } from "../../core/renderer";
 //import { avatarHologram } from "./hologram";
 
 import type { Material, Bone, Texture } from "three";
@@ -130,6 +131,7 @@ const setupMesh = () => {
 };
 
 const tick = () => {
+  if (!renderer.getIsActive()) return;
   animations.update();
 
   const isContact = sceneWeights.contact > 0.001;

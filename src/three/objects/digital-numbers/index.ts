@@ -4,6 +4,7 @@ import fragmentShader from "../../shaders/digital-numbers/fragment.glsl";
 import { resources } from "../../../utils/resources";
 import { sizes } from "../../../utils/sizes";
 import gsap from "gsap";
+import { renderer } from "../../core/renderer";
 
 import type { Object3D, Texture, Vector3 } from "three";
 
@@ -116,7 +117,7 @@ export class DigitalNumbers {
   }
 
   private tick() {
-    if (!this.mesh) return;
+    if (!renderer.getIsActive() || !this.mesh) return;
     this.mesh.visible = sizes.isLandscape;
   }
 

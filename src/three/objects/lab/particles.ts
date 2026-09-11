@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { renderTarget } from "../../core/renderTarget";
 import { lab } from ".";
 import { aboutProgress } from "../../../animations/transitions/about";
+import { renderer } from "../../core/renderer";
 
 let points: Points | null = null;
 let material: ShaderMaterial | null = null;
@@ -123,7 +124,7 @@ const init = () => {
 };
 
 const tick = () => {
-  if (!material) return;
+  if (!renderer.getIsActive() || !material) return;
   material.uniforms.uTime!.value = gsap.ticker.time;
   material.uniforms.uScaleMultiplier!.value = 0.75 + 0.25 * aboutProgress.value;
 

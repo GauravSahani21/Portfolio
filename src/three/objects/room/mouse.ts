@@ -4,6 +4,7 @@ import { avatar } from "../avatar";
 import { room } from ".";
 import { sceneWeights } from "../../../animations/scenes";
 import { isFeatureEnabled } from "../../../utils/features";
+import { renderer } from "../../core/renderer";
 
 import type { Mesh } from "three";
 
@@ -35,7 +36,7 @@ const init = (_mesh: Mesh) => {
 };
 
 const tick = () => {
-  if (!mesh || !enabled.value) return;
+  if (!renderer.getIsActive() || !mesh || !enabled.value) return;
 
   if (sceneWeights.hero < 0.95) return;
 

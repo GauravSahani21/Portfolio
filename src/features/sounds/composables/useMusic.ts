@@ -49,7 +49,7 @@ export const useMusic = () => {
   });
 
   onMounted(() => {
-    if (!isFeatureEnabled("sounds")) return;
+    if (!isFeatureEnabled("sounds") || isTouch.value) return;
     gsap.ticker.add(tick);
   });
 

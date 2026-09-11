@@ -6,6 +6,7 @@ import { scene } from "./scene";
 import { waypoints } from "../../animations/waypoints";
 import { sceneWeights, sceneWeightsInOut } from "../../animations/scenes";
 import { sizes } from "../../utils/sizes";
+import { renderer } from "./renderer";
 
 const PARALLAX_INTENSITY = 1;
 const PARALLAX_SPEED = 0.6;
@@ -73,6 +74,7 @@ const calculateContactTransform = () => {
 };
 
 const tick = () => {
+  if (!renderer.getIsActive()) return;
   const isContact = sceneWeights.contact > 0.001;
 
   if (isContact === false) {

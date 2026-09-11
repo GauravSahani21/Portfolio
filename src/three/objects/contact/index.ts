@@ -5,6 +5,7 @@ import { sceneWeights } from "../../../animations/scenes";
 import { scene } from "../../core/scene";
 import { getContactMaterial } from "../../common/materials";
 import { shadow } from "./shadow";
+import { renderer } from "../../core/renderer";
 
 import type { Object3D } from "three";
 
@@ -41,6 +42,7 @@ const initObjects = () => {
 };
 
 const tick = () => {
+  if (!renderer.getIsActive()) return;
   group.visible = sceneWeights.contact > 0.001;
 };
 

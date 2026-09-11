@@ -1,13 +1,17 @@
 import { onMounted, ref } from "vue";
+ 
+const checkTouch = () =>
+  typeof window !== "undefined" &&
+  ("ontouchstart" in window ||
+    navigator.maxTouchPoints > 0 ||
+    (window.matchMedia && window.matchMedia("(pointer: coarse)").matches) ||
+    window.innerWidth <= 768);
 
-export const isTouch = ref(false);
+export const isTouch = ref(checkTouch());
 
 export const useAgent = () => {
   onMounted(() => {
-    isTouch.value =
-      "ontouchstart" in window ||
-      navigator.maxTouchPoints > 0 ||
-      (window.matchMedia && window.matchMedia("(pointer: coarse)").matches);
+    isTouch.value = checkTouch();
   });
 
   return {

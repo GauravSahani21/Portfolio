@@ -6,6 +6,7 @@ import { sizes } from "../../../utils/sizes";
 
 import vertexShader from "../../shaders/lab-base/vertex.glsl";
 import fragmentShader from "../../shaders/lab-base/fragment.glsl";
+import { renderer } from "../../core/renderer";
 
 import type { Mesh } from "three";
 
@@ -41,7 +42,7 @@ const init = (mesh: Mesh, _display: Mesh) => {
 };
 
 const tick = () => {
-  if (!material) return;
+  if (!renderer.getIsActive() || !material) return;
   material.uniforms.uProgress!.value = aboutProgress.value;
 
   if (display) {

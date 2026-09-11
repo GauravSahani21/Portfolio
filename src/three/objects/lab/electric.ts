@@ -5,6 +5,7 @@ import { isTouch } from "../../../composables/useAgent";
 import { lerp } from "../../../utils/math";
 import vertexShader from "../../shaders/lab-electric/vertex.glsl";
 import fragmentShader from "../../shaders/lab-electric/fragment.glsl";
+import { renderer } from "../../core/renderer";
 
 import type { Mesh } from "three";
 
@@ -63,7 +64,7 @@ const handleScroll = () => {
 };
 
 const tick = () => {
-  if (!material) return;
+  if (!renderer.getIsActive() || !material) return;
   material.uniforms.uTime!.value = gsap.ticker.time;
 
   // Lerp touchVelocity towards target with delta 0.06

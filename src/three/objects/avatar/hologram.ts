@@ -8,6 +8,7 @@ import { mergeGeometries } from "three/examples/jsm/utils/BufferGeometryUtils.js
 import { sceneWeights } from "../../../animations/scenes";
 import { avatar } from ".";
 import { aboutProgress } from "../../../animations/transitions/about";
+import { renderer } from "../../core/renderer";
 
 import type { Material, BufferGeometry, Object3D, Skeleton } from "three";
 
@@ -85,6 +86,7 @@ const setupMesh = () => {
 };
 
 const tick = () => {
+  if (!renderer.getIsActive()) return;
   hologramUniforms.uTime.value = gsap.ticker.time;
   //hologramUniforms.uProgress.value = sceneWeightsInOut.about.in * 1.1 - 0.1;
   hologramUniforms.uProgress.value = aboutProgress.value * 1.1 - 0.1;

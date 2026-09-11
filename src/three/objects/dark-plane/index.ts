@@ -7,6 +7,7 @@ import { sceneWeightsInOut } from "../../../animations/scenes";
 import { renderTarget } from "../../core/renderTarget";
 import { sizes } from "../../../utils/sizes";
 import { mix } from "../../../utils/math";
+import { renderer } from "../../core/renderer";
 
 let geometry: PlaneGeometry | null = null;
 let material: ShaderMaterial | null = null;
@@ -82,7 +83,7 @@ const handleResize = () => {
 };
 
 const tick = () => {
-  if (!material || !mesh) return;
+  if (!renderer.getIsActive() || !material || !mesh) return;
 
   const progress = {
     in: sceneWeightsInOut.about.in,

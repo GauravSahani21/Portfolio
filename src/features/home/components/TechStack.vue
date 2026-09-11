@@ -34,6 +34,8 @@ type Circle = {
 };
 let particlesRaf: number = 0;
 let circles: Circle[] = [];
+let isSectionVisible = false;
+let renderParticlesFn: (() => void) | null = null;
 
 const initParticles = () => {
   const canvas = particlesCanvasRef.value;
@@ -41,12 +43,20 @@ const initParticles = () => {
   const ctx = canvas.getContext("2d");
   if (!ctx) return;
 
+  const isMobile =
+    typeof window !== "undefined" &&
+    ("ontouchstart" in window ||
+      navigator.maxTouchPoints > 0 ||
+      (window.matchMedia && window.matchMedia("(pointer: coarse)").matches) ||
+      window.innerWidth <= 768);
+
   const resize = () => {
     if (!canvas || !canvas.parentElement) return;
     canvas.width = canvas.parentElement.offsetWidth;
     canvas.height = canvas.parentElement.offsetHeight;
     circles = [];
-    for (let i = 0; i < 70; i++) {
+    const count = isMobile ? 12 : 70;
+    for (let i = 0; i < count; i++) {
       circles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
@@ -62,8 +72,8 @@ const initParticles = () => {
   resize();
   window.addEventListener("resize", resize);
 
-  const renderParticles = () => {
-    if (!canvas || !ctx) return;
+  const render = () => {
+    if (!canvas || !ctx || !isSectionVisible) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     for (let i = 0; i < circles.length; i++) {
@@ -82,10 +92,25 @@ const initParticles = () => {
       ctx.fill();
     }
 
-    particlesRaf = requestAnimationFrame(renderParticles);
+    particlesRaf = requestAnimationFrame(render);
   };
 
-  renderParticles();
+  renderParticlesFn = render;
+};
+
+const startParticles = () => {
+  if (isSectionVisible) return;
+  isSectionVisible = true;
+  const fn = renderParticlesFn;
+  if (fn) {
+    cancelAnimationFrame(particlesRaf);
+    particlesRaf = requestAnimationFrame(fn);
+  }
+};
+
+const stopParticles = () => {
+  isSectionVisible = false;
+  cancelAnimationFrame(particlesRaf);
 };
 
 const initAudio = async () => {
@@ -223,72 +248,99 @@ const handleKeyUp = () => {
   playReleaseSound();
 };
 
-onMounted(async () => {
-  initParticles();
+let hasLoadedSpline = false;
+let sectionObserver: IntersectionObserver | null = null;
+
+const loadSpline = async () => {
+  if (hasLoadedSpline || !canvasRef.value) return;
+  hasLoadedSpline = true;
   await initAudio();
 
-  if (canvasRef.value) {
-    try {
-      splineApp = new Application(canvasRef.value);
-      (window as any).splineApp = splineApp;
-      await splineApp.load("/assets/skills-keyboard.spline");
-      isLoading.value = false;
+  try {
+    splineApp = new Application(canvasRef.value, { renderMode: "auto" });
+    (window as any).splineApp = splineApp;
+    await splineApp.load("/assets/skills-keyboard.spline");
+    isLoading.value = false;
 
-      // Ensure 3D text meshes are hidden
-      const textDesktopLight = splineApp.findObjectByName("text-desktop");
-      const textDesktopDark = splineApp.findObjectByName("text-desktop-dark");
-      if (textDesktopDark) textDesktopDark.visible = false;
-      if (textDesktopLight) textDesktopLight.visible = false;
+    // Ensure 3D text meshes are hidden
+    const textDesktopLight = splineApp.findObjectByName("text-desktop");
+    const textDesktopDark = splineApp.findObjectByName("text-desktop-dark");
+    if (textDesktopDark) textDesktopDark.visible = false;
+    if (textDesktopLight) textDesktopLight.visible = false;
 
-      // Event listeners on Spline elements
-      splineApp.addEventListener("mouseHover", (e: SplineEvent) => {
-        if (!splineApp || !e.target?.name) return;
-        const targetName = e.target.name.toLowerCase();
+    // Event listeners on Spline elements
+    splineApp.addEventListener("mouseHover", (e: SplineEvent) => {
+      if (!splineApp || !e.target?.name) return;
+      const targetName = e.target.name.toLowerCase();
 
-        // Leaving a key area to background/platform
-        if (targetName === "body" || targetName === "platform") {
-          if (currentHoveredSkillName !== null) {
-            playReleaseSound();
-            currentHoveredSkillName = null;
-          }
-          return;
+      // Leaving a key area to background/platform
+      if (targetName === "body" || targetName === "platform") {
+        if (currentHoveredSkillName !== null) {
+          playReleaseSound();
+          currentHoveredSkillName = null;
         }
-
-        // Only trigger sound once when entering a new key
-        if (currentHoveredSkillName !== targetName) {
-          if (currentHoveredSkillName !== null) {
-            playReleaseSound();
-          }
-          playPressSound();
-          currentHoveredSkillName = targetName;
-        }
-      });
-
-      splineApp.addEventListener("keyDown", () => {
-        playPressSound();
-      });
-
-      splineApp.addEventListener("keyUp", () => {
-        playReleaseSound();
-      });
-
-      // Run entry animation when section scrolls into view
-      if (sectionRef.value) {
-        ScrollTrigger.create({
-          trigger: sectionRef.value,
-          start: "top 75%",
-          once: true,
-          onEnter: () => {
-            runKeyboardEntryAnimation();
-          },
-        });
-      } else {
-        runKeyboardEntryAnimation();
+        return;
       }
-    } catch (err) {
-      console.warn("Spline load error:", err);
-      isLoading.value = false;
+
+      // Only trigger sound once when entering a new key
+      if (currentHoveredSkillName !== targetName) {
+        if (currentHoveredSkillName !== null) {
+          playReleaseSound();
+        }
+        playPressSound();
+        currentHoveredSkillName = targetName;
+      }
+    });
+
+    splineApp.addEventListener("keyDown", () => {
+      playPressSound();
+    });
+
+    splineApp.addEventListener("keyUp", () => {
+      playReleaseSound();
+    });
+
+    // Run entry animation when section scrolls into view
+    if (sectionRef.value) {
+      ScrollTrigger.create({
+        trigger: sectionRef.value,
+        start: "top 75%",
+        once: true,
+        onEnter: () => {
+          runKeyboardEntryAnimation();
+        },
+      });
+    } else {
+      runKeyboardEntryAnimation();
     }
+  } catch (err) {
+    console.warn("Spline load error:", err);
+    isLoading.value = false;
+  }
+};
+
+onMounted(() => {
+  initParticles();
+
+  sectionObserver = new IntersectionObserver(
+    (entries) => {
+      const entry = entries[0];
+      if (!entry) return;
+
+      if (entry.isIntersecting) {
+        startParticles();
+        if (!hasLoadedSpline) {
+          loadSpline();
+        }
+      } else {
+        stopParticles();
+      }
+    },
+    { rootMargin: "300px" }
+  );
+
+  if (sectionRef.value) {
+    sectionObserver.observe(sectionRef.value);
   }
 
   window.addEventListener("keydown", handleKeyDown);
@@ -296,9 +348,11 @@ onMounted(async () => {
 });
 
 onUnmounted(() => {
+  sectionObserver?.disconnect();
+  sectionObserver = null;
   window.removeEventListener("keydown", handleKeyDown);
   window.removeEventListener("keyup", handleKeyUp);
-  cancelAnimationFrame(particlesRaf);
+  stopParticles();
   if (splineApp) {
     try {
       splineApp.dispose();

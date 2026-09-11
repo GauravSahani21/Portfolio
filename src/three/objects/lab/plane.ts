@@ -2,6 +2,7 @@ import { Mesh, PlaneGeometry, MeshBasicMaterial, LinearSRGBColorSpace } from "th
 import gsap from "gsap";
 import { uniforms as hologramUniforms } from "../avatar/hologram-material";
 import { resources } from "../../../utils/resources";
+import { renderer } from "../../core/renderer";
 
 let plane: Mesh | null = null;
 
@@ -38,7 +39,7 @@ const init = () => {
 };
 
 const tick = () => {
-  if (!plane) return;
+  if (!renderer.getIsActive() || !plane) return;
 
   const progress = hologramUniforms.uProgress.value;
   const yPosition = START_Y + progress * (END_Y - START_Y);

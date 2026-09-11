@@ -3,6 +3,7 @@ import vertexShader from "../../shaders/lab-shine/vertex.glsl";
 import fragmentShader from "../../shaders/lab-shine/fragment.glsl";
 import gsap from "gsap";
 import { aboutProgress } from "../../../animations/transitions/about";
+import { renderer } from "../../core/renderer";
 
 import type { Mesh } from "three";
 
@@ -30,7 +31,7 @@ const init = (mesh: Mesh) => {
 };
 
 const tick = () => {
-  if (!material) return;
+  if (!renderer.getIsActive() || !material) return;
   material.uniforms.uTime!.value = gsap.ticker.time;
   material.uniforms.uProgress!.value = aboutProgress.value;
 };

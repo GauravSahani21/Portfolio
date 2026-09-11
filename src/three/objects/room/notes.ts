@@ -8,6 +8,7 @@ import { resources } from "../../../utils/resources";
 import { sceneWeights } from "../../../animations/scenes";
 import { lerp } from "../../../utils/math";
 import { soundsEnabled } from "../../../features/sounds/composables/useHowler";
+import { renderer } from "../../core/renderer";
 
 import type { BufferGeometry } from "three";
 
@@ -73,7 +74,7 @@ const initMesh = (musicMeshPosition: { x: number; y: number; z: number }) => {
 };
 
 const tick = () => {
-  if (!mesh) return;
+  if (!renderer.getIsActive() || !mesh) return;
 
   const progress = sceneWeights.hero;
   if (progress < 0.001) {

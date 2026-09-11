@@ -7,6 +7,7 @@ import gsap from "gsap";
 
 import type { Material } from "three";
 import { sceneWeights } from "../../../animations/scenes";
+import { renderer } from "../../core/renderer";
 
 let material: Material | null = null;
 
@@ -104,6 +105,7 @@ const wave = () => {
 };
 
 const tick = () => {
+  if (!renderer.getIsActive()) return;
   const isContact = sceneWeights.contact > 0.001;
   if (isContact) {
     const name = sceneFrames.contact.startsWith("proud")

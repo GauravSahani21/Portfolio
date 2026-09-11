@@ -12,7 +12,16 @@ const handleScroll = () => {
   ScrollTrigger.update();
 };
 
+const isMobileDevice = () =>
+  typeof window !== "undefined" &&
+  ("ontouchstart" in window ||
+    navigator.maxTouchPoints > 0 ||
+    (window.matchMedia && window.matchMedia("(pointer: coarse)").matches) ||
+    window.innerWidth <= 768);
+
 export const useScroll = () => {
+  const isMobile = isMobileDevice();
+
   const tick = (time: number) => {
     const instance = lenis.value;
     if (!instance) return;
@@ -27,38 +36,59 @@ export const useScroll = () => {
   const createNewLenis = () => {
     if (lenis.value) {
       lenis.value.destroy();
-      lenis.value.off("scroll", handleScroll);
+      lenis.value.off?.("scroll", handleScroll);
     }
 
-    const isMobile =
-      typeof window !== "undefined" &&
-      ("ontouchstart" in window ||
-        navigator.maxTouchPoints > 0 ||
-        (window.matchMedia && window.matchMedia("(pointer: coarse)").matches) ||
-        window.innerWidth <= 768);
+    if (isMobile) {
+      window.removeEventListener("scroll", handleScroll);
+      window.addEventListener("scroll", handleScroll, { passive: true });
+
+      lenis.value = {
+        scrollTo: (target: any, options?: any) => {
+          if (typeof target === "number") {
+            window.scrollTo({
+              top: target,
+              behavior: options?.immediate ? "auto" : "smooth",
+            });
+          } else if (typeof target === "string") {
+            const el = document.querySelector(target);
+            el?.scrollIntoView({
+              behavior: options?.immediate ? "auto" : "smooth",
+            });
+          } else if (target instanceof HTMLElement) {
+            target.scrollIntoView({
+              behavior: options?.immediate ? "auto" : "smooth",
+            });
+          }
+        },
+        start: () => {},
+        stop: () => {},
+        on: () => {},
+        off: () => {},
+        destroy: () => {
+          window.removeEventListener("scroll", handleScroll);
+        },
+        raf: () => {},
+        isScrolling: false,
+        velocity: 0,
+      } as unknown as Lenis;
+      return;
+    }
 
     lenis.value = new Lenis({
-      duration: isMobile ? 0 : 2,
+      duration: 2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       autoRaf: false,
       syncTouch: false,
-      smoothWheel: !isMobile,
+      smoothWheel: true,
     });
 
     lenis.value.on("scroll", handleScroll);
   };
 
   onMounted(() => {
-    gsap.ticker.add(tick);
-
-    const isMobile =
-      typeof window !== "undefined" &&
-      ("ontouchstart" in window ||
-        navigator.maxTouchPoints > 0 ||
-        (window.matchMedia && window.matchMedia("(pointer: coarse)").matches) ||
-        window.innerWidth <= 768);
-
     if (!isMobile) {
+      gsap.ticker.add(tick);
       gsap.ticker.lagSmoothing(0);
     } else {
       gsap.ticker.lagSmoothing(500, 33);
@@ -78,6 +108,12 @@ export const useScroll = () => {
   });
 
   onUnmounted(() => {
-    gsap.ticker.remove(tick);
+    if (!isMobile) {
+      gsap.ticker.remove(tick);
+    }
+    if (lenis.value) {
+      lenis.value.destroy();
+    }
+    window.removeEventListener("scroll", handleScroll);
   });
 };
