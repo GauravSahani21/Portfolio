@@ -168,9 +168,12 @@ const wave = () => {
   return tl;
 };
 
+let isWakingUp = false;
+
 const wakeUp = () => {
   if (isAwake) return;
   isAwake = true;
+  isWakingUp = true;
   const sleepingAction = actions.get("sleeping");
   const wakeUpAction = actions.get("wake-up");
   const contactIdleAction = actions.get("contact-idle");
@@ -179,16 +182,28 @@ const wakeUp = () => {
   stopSnoreRepetition();
   playSound("gasp");
 
-  //crossfade to wake-up
-  sleepingAction.crossFadeTo(wakeUpAction, 0.2);
+  wakeUpAction.reset();
+  wakeUpAction.setEffectiveWeight(1);
   wakeUpAction.play();
+
+  //crossfade from sleeping to wake-up
+  sleepingAction.crossFadeTo(wakeUpAction, 0.2, false);
 
   const wakeUpDuration = wakeUpAction.getClip().duration;
 
   setTimeout(() => {
-    //crossfade to contact-idle
-    wakeUpAction.crossFadeTo(contactIdleAction, 0.5);
+    contactIdleAction.reset();
+    contactIdleAction.setEffectiveWeight(1);
     contactIdleAction.play();
+
+    wakeUpAction.crossFadeTo(contactIdleAction, 0.5, false);
+
+    setTimeout(() => {
+      isWakingUp = false;
+      setWeight("contact-idle", 1);
+      setWeight("sleeping", 0);
+      setWeight("wake-up", 0);
+    }, 500);
   }, wakeUpDuration * 1000);
 
   face.wakeUp();
@@ -205,11 +220,24 @@ const updateContact = () => {
     setWeight("sleeping", 1);
     setWeight("contact-idle", 0);
     setWeight("wake-up", 0);
+    const sleeping = actions.get("sleeping");
+    if (sleeping && !sleeping.isRunning()) {
+      sleeping.play();
+    }
+  } else if (!isWakingUp) {
+    setWeight("sleeping", 0);
+    setWeight("wake-up", 0);
+    setWeight("contact-idle", 1);
+    const contactIdle = actions.get("contact-idle");
+    if (contactIdle && !contactIdle.isRunning()) {
+      contactIdle.play();
+    }
   }
 };
 
 const update = () => {
   const isContact = sceneWeights.contact > 0.001;
+
   if (isContact) {
     updateContact();
   } else {
